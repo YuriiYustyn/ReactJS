@@ -5,11 +5,12 @@ class Timer extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         count: 10,
+         count: `${this.props.count}`,
          length: 1540,
-         schritt: 1,
-         autostart: false,
-         text: "Час вийшов"
+         schritt: `${this.props.schritt}`,
+         class:  `${this.props.class}`,
+         autostart: `${this.props.autostart}`
+         
       }
       this.startTimer = this.startTimer.bind(this)
       this.stopTimer = this.stopTimer.bind(this)
@@ -37,7 +38,7 @@ class Timer extends React.Component {
          let segment =
             setInterval(() => {
       
-               document.querySelector(".segment").style.width = `${this.state.length}px`
+               document.querySelector(`.${this.props.class}`).style.width = `${this.state.length}px`
             }, 1000)
       
       
@@ -49,13 +50,13 @@ class Timer extends React.Component {
 
    resetTimer() {
       clearInterval(this.timer)
-      this.setState({ count: 10, length: 1540 })
+      this.setState({ count: `${this.props.count}`, length: 1540 })
          
       
    }
 
    componentDidMount() {
-      if (this.state.autostart === true) {
+      if (this.state.autostart == 1) {
          this.startTimer()
       }
       
@@ -71,72 +72,9 @@ class Timer extends React.Component {
             <button onClick={this.startTimer}>Start</button>
             <button onClick={this.stopTimer}>Stop</button>
             <button onClick={this.resetTimer}>Reset</button>
-            <div className="segment"></div>   
+            <div className={`${this.props.class}`}></div>   
          </div>
       )
    }
 }
-
-
-
-
-
-// class Timer extends Component {
-//    state = {
-//       text: "hello world",
-//       addtext: "",
-//       length: 1540,
-//       timeLeft: 100,
-//       time: null,
-//       intervalId: true
-//    }
-
-   
-//    pauseTimer = () => {
-//       this.setState({ intervalId: "falce" })
-      
-//    }
-//    startTimer = () => {
-        
-//       this.setState({ intervalId: true })
-//       let segment = setInterval(() => {
-//          // if (this.state.intervalId = true)
-//             document.querySelector(".segment").style.width = `${this.state.length}px`
-//       }, 1000)
-   
-//       const timer = () => {
-         
-//          this.setState({
-//             timeLeft: this.state.timeLeft - 1, length: this.state.length - 15.4
-//          })
-//        }
-      
-         
-//       setInterval(() => {
-//          if (this.state.intervalId === true) {
-//             timer()
-//          } else {
-//             clearInterval(bar)
-//          }
-//       }, 1000) 
-//       return this.setState({ timeLeft: this.state.timeLeft - 1,length: this.state.length - 15.4 })
-//    }
-
-//    }
-   
-
-
-
-
-//    render() {
-//       return (
-//          <div className="timer">
-//             <div className="segment"  ></div>
-            
-//             <h1>{this.state.timeLeft} </h1>
-//             <button onClick={this.startTimer}>Запустити таймер</button>
-//             <button onClick={this.pauseTimer}>стоп таймер</button>
-//          </div>)
-//    }
-// }
 export default Timer
