@@ -1,22 +1,20 @@
 import React from "react"
-// import  { Component } from 'react'
 
 class Timer extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         count: `${this.props.count}`,
+         count: this.props.count,
          length: 1540,
-         schritt: `${this.props.schritt}`,
-         class:  `${this.props.class}`,
-         autostart: `${this.props.autostart}`
+         schritt: this.props.schritt,
+         class:  this.props.class,
+         autostart: this.props.autostart
          
       }
       this.startTimer = this.startTimer.bind(this)
       this.stopTimer = this.stopTimer.bind(this)
       this.resetTimer = this.resetTimer.bind(this)
    }
-   
    
    startTimer() {
       
@@ -27,22 +25,20 @@ class Timer extends React.Component {
                length: this.state.length - 154
                
             })
-           
+         
          }
-         else{
-             clearInterval(this.timer)
-            this.setState({ count: "Час вийшов"})
+         else {
+            clearInterval(this.timer)
+            this.setState({ count: "Час вийшов" })
          }
-         console.log(this.state.count)
-         }, 1000)
+   
+      }, (this.state.schritt*1000 ))
          let segment =
             setInterval(() => {
-      
                document.querySelector(`.${this.props.class}`).style.width = `${this.state.length}px`
             }, 1000)
       
-      
-      }
+   }
    
    stopTimer() {
       clearInterval(this.timer)
@@ -51,16 +47,12 @@ class Timer extends React.Component {
    resetTimer() {
       clearInterval(this.timer)
       this.setState({ count: `${this.props.count}`, length: 1540 })
-         
-      
    }
 
    componentDidMount() {
       if (this.state.autostart == 1) {
          this.startTimer()
       }
-      
-      
    }
 
    render() {
